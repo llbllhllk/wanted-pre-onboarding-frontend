@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Form = ({ formProps }) => {
-  const { buttonType, buttonTestId } = formProps;
+  const { buttonType, buttonTestId, path } = formProps;
+
+  const navigate = useNavigate();
 
   const [input, setInput] = useState({
     email: "",
     password: "",
   });
-
   const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
@@ -26,7 +28,7 @@ const Form = ({ formProps }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // /signin 경로로 이동
+    navigate(path);
   };
 
   return (

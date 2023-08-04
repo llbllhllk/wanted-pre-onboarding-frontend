@@ -2,16 +2,16 @@ import { useMemo } from "react";
 
 import Form from "../components/Form";
 
-const SignUp = () => {
+const SignIn = () => {
   const formProps = useMemo(() => {
     return {
-      buttonType: "회원가입",
-      buttonTestId: "signup-button",
-      path: '/signin'
+      buttonType: "로그인",
+      buttonTestId: "signin-button",
+      path: "/todo",
     };
   }, []);
 
   return <Form formProps={formProps} />;
 };
 
-export default SignUp;
+export default SignIn;
