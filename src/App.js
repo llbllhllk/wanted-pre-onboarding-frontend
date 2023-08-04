@@ -1,7 +1,7 @@
+import SignUp from "./pages/SignUp";
+
 function App() {
-  return <div>
-    Hello World!
-  </div>;
+  return <></>;
 }
 
 export default App;
