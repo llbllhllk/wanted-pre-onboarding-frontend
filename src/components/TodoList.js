@@ -1,5 +1,11 @@
+import TodoListItem from "./TodoListItem";
+
 const TodoList = () => {
-  return <ol></ol>;
+  return (
+    <ul>
+      <TodoListItem />
+    </ul>
+  );
 };
 
 export default TodoList;
