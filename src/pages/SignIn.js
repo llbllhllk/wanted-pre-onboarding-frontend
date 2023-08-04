@@ -5,7 +5,7 @@ import Form from "../components/Form";
 const SignIn = () => {
   const formProps = useMemo(() => {
     return {
-      buttonType: "로그인",
+      page: 'signin',
       buttonTestId: "signin-button",
       path: "/todo",
     };

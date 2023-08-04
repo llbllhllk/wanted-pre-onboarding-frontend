@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import fetchData from "../api";
 
 const Form = ({ formProps }) => {
-  const { buttonType, buttonTestId, path } = formProps;
+  const { page, buttonTestId, path } = formProps;
 
   const navigate = useNavigate();
 
@@ -26,9 +27,23 @@ const Form = ({ formProps }) => {
     });
   };
 
+  const handleRequest = async () => {
+    const config = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(input),
+    };
+
+    const res = await fetchData(`/auth/${page}`, config);
+
+    console.log(res);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate(path);
+    handleRequest();
   };
 
   return (
@@ -52,7 +67,7 @@ const Form = ({ formProps }) => {
         onChange={handleChange}
       />
       <button type="submit" data-testid={buttonTestId} disabled={isDisabled}>
-        {buttonType}
+        {page === "signup" ? "회원가입" : "로그인"}
       </button>
     </form>
   );

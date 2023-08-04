@@ -5,9 +5,9 @@ import Form from "../components/Form";
 const SignUp = () => {
   const formProps = useMemo(() => {
     return {
-      buttonType: "회원가입",
+      page: "signup",
       buttonTestId: "signup-button",
-      path: '/signin'
+      path: "/signin",
     };
   }, []);
 
