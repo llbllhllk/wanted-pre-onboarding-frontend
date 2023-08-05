@@ -1,11 +1,20 @@
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
+import useLocalStorage from "../hooks/useLocalStorage";
+import { useNavigate } from "react-router-dom";
 
 import Form from "../components/Form";
 
 const SignIn = () => {
+  const navigate = useNavigate();
+  const [storedValue] = useLocalStorage("access_token");
+
+  useEffect(() => {
+    storedValue !== undefined && navigate("/todo");
+  }, []);
+
   const formProps = useMemo(() => {
     return {
-      page: 'signin',
+      page: "signin",
       buttonTestId: "signin-button",
       path: "/todo",
     };
