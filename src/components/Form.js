@@ -86,6 +86,11 @@ const Form = ({ formProps }) => {
       <button type="submit" data-testid={buttonTestId} disabled={isDisabled}>
         {page === "signup" ? "회원가입" : "로그인"}
       </button>
+      {page === "signin" && (
+        <button type="button" onClick={() => navigate("/signup")}>
+          회원가입
+        </button>
+      )}
       <strong>
         {isDuplicated &&
           "입력하신 아이디와 비밀번호가 중복되었습니다. 다시 입력해주세요."}
