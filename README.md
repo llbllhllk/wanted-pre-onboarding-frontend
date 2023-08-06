@@ -6,18 +6,18 @@
 <br/>
 
 ## 📚 라이브러리
-"react": "^18.2.0"
-"react-router-dom": "^6.14.2"
-"http-proxy-middleware": "^2.0.6"
+- "react": "^18.2.0"
+- "react-router-dom": "^6.14.2"
+- "http-proxy-middleware": "^2.0.6"
 
 <br/>
 
 ## 🎡 프로젝트 실행 방법
-1. repository를 clone합니다.
-`git clone https://github.com/llbllhllk/wanted-pre-onboarding-frontend.git`
-2. package를 설치합니다.
-`npm install`
-3. react 앱을 실행합니다.
+1. repository를 clone합니다. <br/>
+`git clone https://github.com/llbllhllk/wanted-pre-onboarding-frontend.git` <br/>
+2. package를 설치합니다. <br/>
+`npm install` <br/>
+3. react 앱을 실행합니다. <br/>
 `npm start`
 
 <br/>
