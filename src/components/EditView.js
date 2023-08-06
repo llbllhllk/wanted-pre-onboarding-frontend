@@ -16,7 +16,7 @@ const EditView = ({
 
   useEffect(() => {
     setEditTodo({ ...editTodo, isCompleted: isChecked });
-  }, [isChecked]);
+  }, [isChecked, editTodo]);
 
   const handleChangeTodo = (e) => {
     const { name, value } = e.target;

@@ -10,7 +10,7 @@ const SignIn = () => {
 
   useEffect(() => {
     storedValue !== undefined && navigate("/todo");
-  }, []);
+  }, [storedValue, navigate]);
 
   const formProps = useMemo(() => {
     return {

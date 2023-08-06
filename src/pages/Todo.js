@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { useNavigate } from "react-router-dom";
 
@@ -30,7 +30,7 @@ const Todo = () => {
     };
 
     handleGetTodos();
-  }, []);
+  }, [storedValue, navigate]);
 
   const handleSetTodos = (todo) => {
     setTodos([...todos, todo]);
