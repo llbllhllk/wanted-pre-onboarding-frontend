@@ -30,7 +30,7 @@ const Todo = () => {
     };
 
     handleGetTodos();
-  }, [storedValue, navigate]);
+  }, []);
 
   const handleSetTodos = (todo) => {
     setTodos([...todos, todo]);

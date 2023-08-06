@@ -13,7 +13,7 @@ function App() {
 
   useEffect(() => {
     storedValue === undefined && navigate("/signin");
-  }, [storedValue, navigate]);
+  }, []);
 
   return (
     <Routes>
