@@ -47,7 +47,7 @@ const Form = ({ formProps }) => {
     if (page === "signup") {
       res.ok ? navigate(path) : setIsDuplicated(true);
     } else {
-      if (res.status === 404) {
+      if (res.ok === false) {
         setIsWrong(true);
       } else {
         const jsonData = await res.json();
