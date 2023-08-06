@@ -1,12 +1,12 @@
 const fetchData = async (api, config) => {
   const url = `https://www.pre-onboarding-selection-task.shop${api}`;
 
-  const res = await fetch(url, config);
-  const jsonData = await res.json();
-
-  console.log(jsonData);
-
-  return jsonData;
-};
+  try {
+    const res = await fetch(url, config);
+    return res;
+  } catch (err) {
+    console.error(err);
+  }
+}
 
 export default fetchData;

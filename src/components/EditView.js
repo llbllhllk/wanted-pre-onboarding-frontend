@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import fetchData from "../api";
 
 const EditView = ({
   id,
@@ -27,8 +28,7 @@ const EditView = ({
   };
 
   const handleRequest = async (method) => {
-    const url = `https://www.pre-onboarding-selection-task.shop/todos/${id}`;
-
+    const api = `/todos/${id}`;
     const config = {
       method,
       headers: {
@@ -38,14 +38,10 @@ const EditView = ({
       body: JSON.stringify(editTodo),
     };
 
-    try {
-      const res = await fetch(url, config);
-      if (res.status === 200) {
-        setCurrentTodo(editTodo.todo);
-        onToggleEditMode();
-      }
-    } catch (err) {
-      console.error(err);
+    const res = await fetchData(api, config);
+    if (res.status === 200) {
+      setCurrentTodo(editTodo.todo);
+      onToggleEditMode();
     }
   };
 

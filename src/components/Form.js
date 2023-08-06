@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useLocalStorage from "../hooks/useLocalStorage";
+import fetchData from "../api";
 
 const Form = ({ formProps }) => {
   const { page, buttonTestId, path } = formProps;
@@ -32,7 +33,7 @@ const Form = ({ formProps }) => {
   };
 
   const handleRequest = async () => {
-    const url = `https://www.pre-onboarding-selection-task.shop/auth/${page}`;
+    const api = `/auth/${page}`;
 
     const config = {
       method: "POST",
@@ -42,22 +43,18 @@ const Form = ({ formProps }) => {
       body: JSON.stringify(input),
     };
 
-    try {
-      const res = await fetch(url, config);
-      if (page === "signup") {
-        res.ok ? navigate(path) : setIsDuplicated(true);
+    const res = await fetchData(api, config);
+    if (page === "signup") {
+      res.ok ? navigate(path) : setIsDuplicated(true);
+    } else {
+      if (res.status === 404) {
+        setIsWrong(true);
       } else {
-        if (res.status === 404) {
-          setIsWrong(true);
-        } else {
-          const jsonData = await res.json();
-          const access_token = jsonData.access_token;
-          setValue(access_token);
-          navigate(path);
-        }
+        const jsonData = await res.json();
+        const access_token = jsonData.access_token;
+        setValue(access_token);
+        navigate(path);
       }
-    } catch (error) {
-      console.error("Error parsing JSON");
     }
   };
 

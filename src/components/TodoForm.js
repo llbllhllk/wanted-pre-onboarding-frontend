@@ -1,7 +1,5 @@
-import { formToJSON } from "axios";
 import { useState } from "react";
 import fetchData from "../api";
-import useLocalStorage from "../hooks/useLocalStorage";
 
 const TodoForm = ({ accessToken, onSetTodos }) => {
   const [todo, setTodo] = useState({
@@ -9,7 +7,7 @@ const TodoForm = ({ accessToken, onSetTodos }) => {
   });
 
   const handleCreateTodo = async () => {
-    const url = `https://www.pre-onboarding-selection-task.shop/todos`;
+    const api = "/todos";
 
     const config = {
       method: "POST",
@@ -20,13 +18,10 @@ const TodoForm = ({ accessToken, onSetTodos }) => {
       body: JSON.stringify(todo),
     };
 
-    try {
-      const res = await fetch(url, config);
-      const jsonData = await res.json();
-      onSetTodos(jsonData);
-    } catch (err) {
-      console.error(err);
-    }
+    const res = await fetchData(api, config);
+    const jsonData = await res.json();
+
+    onSetTodos(jsonData);
   };
 
   const handleChange = (e) => {
@@ -40,7 +35,7 @@ const TodoForm = ({ accessToken, onSetTodos }) => {
   const handleAddTodo = (e) => {
     setTodo({ todo: "" });
     e.preventDefault();
-    handleCreateTodo(accessToken);
+    if (todo.todo !== "") handleCreateTodo(accessToken);
   };
 
   return (

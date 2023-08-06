@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import TodoForm from "../components/TodoForm";
 import TodoList from "../components/TodoList";
+import fetchData from "../api";
 
 const Todo = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const Todo = () => {
     storedValue === undefined && navigate("/signin");
 
     const handleGetTodos = async () => {
-      const url = `https://www.pre-onboarding-selection-task.shop/todos`;
+      const api = "/todos";
 
       const config = {
         method: "GET",
@@ -23,27 +24,21 @@ const Todo = () => {
         },
       };
 
-      try {
-        const res = await fetch(url, config);
-        const jsonData = await res.json();
-        console.log(jsonData);
-        setTodos(jsonData);
-      } catch (err) {
-        console.error(err);
-      }
+      const res = await fetchData(api, config);
+      const jsonData = await res.json();
+      setTodos(jsonData);
     };
 
     handleGetTodos();
   }, []);
 
-  // useCallback 다시 한번 알아보고 사용하기
-  const handleSetTodos = useCallback((todo) => {
+  const handleSetTodos = (todo) => {
     setTodos([...todos, todo]);
-  });
+  };
 
-  const handleFilterTodos = useCallback((id) => {
+  const handleFilterTodos = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
-  });
+  };
 
   return (
     <div>
