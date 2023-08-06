@@ -1,9 +1,18 @@
 import TodoListItem from "./TodoListItem";
 
-const TodoList = () => {
+const TodoList = ({ todos, onFilterTodos }) => {
   return (
     <ul>
-      <TodoListItem />
+      {todos.map((todo) => (
+        <TodoListItem
+          key={todo.id}
+          id={todo.id}
+          todo={todo.todo}
+          isCompleted={todo.isCompleted}
+          userId={todo.userId}
+          onFilterTodos={onFilterTodos}
+        />
+      ))}
     </ul>
   );
 };

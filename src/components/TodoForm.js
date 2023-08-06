@@ -1,14 +1,16 @@
 import { formToJSON } from "axios";
 import { useState } from "react";
 import fetchData from "../api";
+import useLocalStorage from "../hooks/useLocalStorage";
 
-const TodoForm = () => {
-  const [todo, setTodo] = useState("");
+const TodoForm = ({ accessToken, onSetTodos }) => {
+  const [todo, setTodo] = useState({
+    todo: "",
+  });
 
   const handleCreateTodo = async () => {
-    const api = "/todos";
-    // localstorage에서 accessToken 받기
-    // const accessToken =
+    const url = `https://www.pre-onboarding-selection-task.shop/todos`;
+
     const config = {
       method: "POST",
       headers: {
@@ -17,16 +19,28 @@ const TodoForm = () => {
       },
       body: JSON.stringify(todo),
     };
-    const res = await fetchData(api, config);
+
+    try {
+      const res = await fetch(url, config);
+      const jsonData = await res.json();
+      onSetTodos(jsonData);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleChange = (e) => {
-    const { value } = e.target;
-    setTodo(value);
+    const { name, value } = e.target;
+    setTodo({
+      ...todo,
+      [name]: value,
+    });
   };
 
-  const handleAddTodo = () => {
-    // todo => localstorage
+  const handleAddTodo = (e) => {
+    setTodo({ todo: "" });
+    e.preventDefault();
+    handleCreateTodo(accessToken);
   };
 
   return (
@@ -34,7 +48,7 @@ const TodoForm = () => {
       <input
         data-testid="new-todo-input"
         name="todo"
-        value={todo}
+        value={todo.todo}
         onChange={handleChange}
       />
       <button type="submit" data-testid="new-todo-add-button">
